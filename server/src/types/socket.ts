@@ -1,0 +1,3 @@
+type SocketId = string
+
+ 
