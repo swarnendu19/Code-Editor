@@ -1,10 +1,24 @@
-import React, {createContext, useContext, useState } from 'react'
-import { ACTIVITY_STATE, AppContextType, DrawingData } from '../types/app'
-import { RemoteUser, User, USER_STATUS } from '../types/user'
+import {
+    ACTIVITY_STATE,
+    AppContext as AppContextType,
+    DrawingData,
+} from "@/types/app"
+import { RemoteUser, USER_STATUS, User } from "@/types/user"
+import { ReactNode, createContext, useContext, useState } from "react"
 
 const AppContext = createContext<AppContextType | null>(null)
 
-const AppContextProvider: React.FC<{children: React.ReactNode}> = ({children})=>{
+export const useAppContext = (): AppContextType => {
+    const context = useContext(AppContext)
+    if (context === null) {
+        throw new Error(
+            "useAppContext must be used within a AppContextProvider",
+        )
+    }
+    return context
+}
+
+function AppContextProvider({ children }: { children: ReactNode }) {
     const [users, setUsers] = useState<RemoteUser[]>([])
     const [status, setStatus] = useState<USER_STATUS>(USER_STATUS.INITIAL)
     const [currentUser, setCurrentUser] = useState<User>({
@@ -16,26 +30,25 @@ const AppContextProvider: React.FC<{children: React.ReactNode}> = ({children})=>
     )
     const [drawingData, setDrawingData] = useState<DrawingData>(null)
 
-    return(
-        <AppContext.Provider value={{
-            users, setUsers, 
-            currentUser, setCurrentUser, 
-            status,setStatus,
-            activityState,setActivityState,
-            drawingData,setDrawingData
-         }}>
+    return (
+        <AppContext.Provider
+            value={{
+                users,
+                setUsers,
+                currentUser,
+                setCurrentUser,
+                status,
+                setStatus,
+                activityState,
+                setActivityState,
+                drawingData,
+                setDrawingData,
+            }}
+        >
             {children}
         </AppContext.Provider>
     )
 }
 
-export const useAppContext =  (): AppContextType => {
-     const context = useContext(AppContext)
-     if(!context){
-        throw new Error("Context not Present");
-     }
-     return context;
-}
-
-export {AppContext}
-export default AppContextProvider
+export { AppContextProvider }
+export default AppContext
