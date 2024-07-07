@@ -5,6 +5,7 @@
       "lib": ["ESNext", "DOM", "DOM.Iterable"],
       "module": "ESNext",
       "skipLibCheck": true,
+      "typeRoots": ["node_modules/@types"],
 
       /* Bundler mode */
       "moduleResolution": "Node",
@@ -28,6 +29,6 @@
           "@/*": ["src/*"],
       },
   },
-  "include": ["src"],
+  "include": ["src/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }],
 }
