@@ -1,9 +1,13 @@
 import useResponsive from "@/hooks/useResponsive"
 import classNames from "classnames"
+import SidebarButton from "./sidebar-views/SidebarButton"
+import { VIEWS } from "@/types/view"
+import { useViews } from "@/context/ViewContext"
 
  
 const SideBar = () => {
-
+  const {viewIcons } = useViews()
+  
   const  {minHeightReached } = useResponsive() 
   return (
      <aside className='flex w-full md:h-full md:max-h-full md:min-h-full md:w-auto'>
@@ -15,7 +19,10 @@ const SideBar = () => {
                     },
                 )}
             >
-         TabButton
+         <SidebarButton 
+          viewName = {VIEWS.FILES}
+          icon = {viewIcons[VIEWS.FILES]}
+         />
        </div>
      </aside>
   )
