@@ -1,10 +1,19 @@
 // src/context/ViewContext.tsx
 
-import React, { createContext, ReactNode, useState } from 'react';
+import  { createContext, ReactNode, useContext, useState } from 'react';
 import { ViewContextType } from '@/types/view';
 
 // Create the context
 const ViewContext = createContext<ViewContextType | null>(null);
+
+export const useViews = (): ViewContextType => {
+    const context = useContext(ViewContext)
+    if (!context) {
+         
+        throw new Error("useViews must be used within a ViewContextProvider")
+    }
+    return context
+}
 
 const ViewContextProvider = ({ children }: { children: ReactNode }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
@@ -16,4 +25,5 @@ const ViewContextProvider = ({ children }: { children: ReactNode }) => {
     );
 };
 
-export { ViewContext, ViewContextProvider };
+export default ViewContext
+export {ViewContextProvider };
