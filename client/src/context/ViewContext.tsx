@@ -1,20 +1,19 @@
-// src/context/ViewContext.tsx
-
-import  { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useState } from 'react';
 import { ViewContextType } from '@/types/view';
 
-// Create the context
+// Create the context with a more meaningful default value if desired
 const ViewContext = createContext<ViewContextType | null>(null);
 
+// Custom hook to use the ViewContext
 export const useViews = (): ViewContextType => {
-    const context = useContext(ViewContext)
+    const context = useContext(ViewContext);
     if (!context) {
-         
-        throw new Error("useViews must be used within a ViewContextProvider")
+        throw new Error("useViews must be used within a ViewContextProvider");
     }
-    return context
+    return context;
 }
 
+// Context provider component
 const ViewContextProvider = ({ children }: { children: ReactNode }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
 
@@ -25,5 +24,5 @@ const ViewContextProvider = ({ children }: { children: ReactNode }) => {
     );
 };
 
-export default ViewContext
-export {ViewContextProvider };
+export default ViewContext;
+export { ViewContextProvider };

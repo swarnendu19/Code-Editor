@@ -10,6 +10,8 @@ const Splitter = ({children}:{children: ReactNode}) => {
    const {isMobile,width} = useWindowDimensions()
    const {getItem, setItem}  = useLocalStorage();
    const { isSidebarOpen} = useViews()
+
+
   const getGutter = ()=>{
     const gutter = document.createElement("div")
     gutter.className = "h-full cursor-e-resizer hidden md:block ";
@@ -47,6 +49,10 @@ const Splitter = ({children}:{children: ReactNode}) => {
 
   }
   
+  const getGutterStyle = ()=>({
+    width: "7px",
+    display: isSidebarOpen && !isMobile ? "block" : "none"
+  })
   return (
      <Split
      sizes={getSizes()}
@@ -59,6 +65,8 @@ const Splitter = ({children}:{children: ReactNode}) => {
      direction="horizontal"
      cursor="e-resize"
      onDrag={handleDrag}
+     gutterStyle={getGutterStyle}
+     className="flex h-screen min-h-screen max-w-full items-center justify-center overflow-hidden" 
      >
       {children}
      </Split>
