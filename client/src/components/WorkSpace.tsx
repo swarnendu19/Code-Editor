@@ -1,8 +1,8 @@
  
 function WorkSpace() {
   return (
-    <div>
-      
+    <div className=" text-black bg-slate-400">
+      Work
     </div>
   )
 }

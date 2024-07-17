@@ -12,10 +12,7 @@ const EditorPage = () => {
    <ViewContextProvider>
     <Splitter>
       <SideBar/>
-      <body className="bg-white text-red-600">
-        Hello div
-      </body>
-      {/* <WorkSpace/> */}
+      <WorkSpace/>
     </Splitter>
    </ViewContextProvider>
   )
