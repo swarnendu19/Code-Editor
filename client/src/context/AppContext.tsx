@@ -8,16 +8,6 @@ import { ReactNode, createContext, useContext, useState } from "react"
 
 const AppContext = createContext<AppContextType | null>(null)
 
-export const useAppContext = (): AppContextType => {
-    const context = useContext(AppContext)
-    if (context === null) {
-        throw new Error(
-            "useAppContext must be used within a AppContextProvider",
-        )
-    }
-    return context
-}
-
 function AppContextProvider({ children }: { children: ReactNode }) {
     const [users, setUsers] = useState<RemoteUser[]>([])
     const [status, setStatus] = useState<USER_STATUS>(USER_STATUS.INITIAL)
@@ -49,6 +39,17 @@ function AppContextProvider({ children }: { children: ReactNode }) {
         </AppContext.Provider>
     )
 }
+
+export const useAppContext = (): AppContextType => {
+    const context = useContext(AppContext)
+    if (context === null) {
+        throw new Error(
+            "useAppContext must be used within a AppContextProvider",
+        )
+    }
+    return context
+}
+
 
 export { AppContextProvider }
 export default AppContext

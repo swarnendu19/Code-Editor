@@ -1,8 +1,9 @@
-import React from 'react'
-
+ 
 const ChatList = () => {
   return (
-    <div>
+    <div 
+    className='flex-grow overflow-auto rounded-md bg-darkHover p-2'
+    >
       
     </div>
   )
