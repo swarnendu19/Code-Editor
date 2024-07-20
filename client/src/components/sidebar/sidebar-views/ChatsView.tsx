@@ -1,3 +1,4 @@
+import ChatInput from "@/components/chats/ChatInput";
 import ChatList from "@/components/chats/ChatList";
 import useResponsive from "@/hooks/useResponsive"
 
@@ -13,7 +14,7 @@ const ChatsView = () => {
         Group CHats
      </h1>
      <ChatList/>
-     <ChatList/>
+      <ChatInput/>
     </div>
   )
 }
