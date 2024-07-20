@@ -1,19 +1,19 @@
-import { ChatContext, ChatMessage } from "@/types/chat"
+import { ChatContextProps, ChatMessageProps } from "@/types/chat"
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 import { useSocket } from "./SocketContext"
 import { SocketEvent } from "@/types/socket"
 
-const ChatContext = createContext<ChatContext | null>(null)
+const ChatContext = createContext<ChatContextProps | null>(null)
 
 
 const ChatContextProvider = ({children}: {children: ReactNode}) => {
-    const{socket} = useSocket()
-    const [messages , setMessages ] = useState<ChatMessage[]>([])
+    const {socket} = useSocket()
+    const [messages , setMessages ] = useState<ChatMessageProps[]>([])
     const [isNewMessage, setIsNewMessage] = useState<boolean>(false)
     const [lastScrollHeight, setLastScrollHeight] = useState(0)
     
     useEffect(()=>{
-        socket.on(SocketEvent.RECEIVE_MESSAGE,({message}: {message: ChatMessage})=>{
+        socket.on(SocketEvent.RECEIVE_MESSAGE,({message}: {message: ChatMessageProps})=>{
             setMessages((messages) => [...messages, message])           
             setIsNewMessage(true)
         })
@@ -45,4 +45,4 @@ export const useChatRoom = ()=>{
       
 }
 
-export default ChatContextProvider
+export {ChatContextProvider}

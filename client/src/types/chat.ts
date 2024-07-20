@@ -1,14 +1,14 @@
-interface ChatMessage {
+interface ChatMessageProps {
     id: string
     message: string
     username: string
     timestamp: string
 }
 
-interface ChatContext {
-    messages: ChatMessage[]
+interface ChatContextProps {
+    messages: ChatMessageProps[]
     setMessages: (
-        messages: ChatMessage[] | ((messages: ChatMessage[]) => ChatMessage[]),
+        messages: ChatMessageProps[] | ((messages: ChatMessageProps[]) => ChatMessageProps[]),
     ) => void
     isNewMessage: boolean
     setIsNewMessage: (isNewMessage: boolean) => void
@@ -16,4 +16,4 @@ interface ChatContext {
     setLastScrollHeight: (lastScrollHeight: number) => void
 }
 
-export { ChatContext, ChatMessage }
+export { ChatContextProps, ChatMessageProps }
