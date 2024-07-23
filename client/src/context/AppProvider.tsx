@@ -1,22 +1,30 @@
 import { ReactNode } from "react"
-import { AppContextProvider } from "./AppContext"
-import {SocketProvider} from "./SocketContext"
-import { ViewContextProvider } from "./ViewContext"
-import {ChatContextProvider} from "./ChatContext"
+import { AppContextProvider } from "./AppContext.js"
+import { ChatContextProvider } from "./ChatContext.jsx"
+import { FileContextProvider } from "./FileContext.jsx"
+import { RunCodeContextProvider } from "./RunCodeContext.jsx"
+import { SettingContextProvider } from "./SettingContext.jsx"
+import { SocketProvider } from "./SocketContext.jsx"
+import { ViewContextProvider } from "./ViewContext.js"
 
- 
-const AppProvider = ({children}: {children: ReactNode}) => {
-  return (
-     <AppContextProvider>
-        <SocketProvider>
-         <ViewContextProvider>
-            <ChatContextProvider>
-             {children}
-            </ChatContextProvider>
-         </ViewContextProvider>
-        </SocketProvider>
-     </AppContextProvider>
-  )
+function AppProvider({ children }: { children: ReactNode }) {
+    return (
+        <AppContextProvider>
+            <SocketProvider>
+                <SettingContextProvider>
+                    <ViewContextProvider>
+                        <FileContextProvider>
+                            <RunCodeContextProvider>
+                                <ChatContextProvider>
+                                    {children}
+                                </ChatContextProvider>
+                            </RunCodeContextProvider>
+                        </FileContextProvider>
+                    </ViewContextProvider>
+                </SettingContextProvider>
+            </SocketProvider>
+        </AppContextProvider>
+    )
 }
 
 export default AppProvider
