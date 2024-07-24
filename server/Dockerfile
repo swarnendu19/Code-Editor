@@ -27,9 +27,6 @@ COPY --from=builder /app/dist ./dist
 # Set ownership and permissions
 RUN chown -R node:node /app && chmod -R 755 /app
  
-# Copy PM2 ecosystem configuration file
-COPY ecosystem.config.cjs .
-
 # Change to the non-root user
 USER node
 
