@@ -7,8 +7,7 @@ import { fileURLToPath, URL } from "url"
 export default defineConfig({
     plugins: [react()],
     build: {
-        chunkSizeWarningLimit: 1600,
-        outDir: 'dist',   
+        chunkSizeWarningLimit: 1600,  
         rollupOptions: {
             output: {
                 manualChunks(id) {
