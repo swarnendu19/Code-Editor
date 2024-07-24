@@ -1,6 +1,6 @@
 import SplitterComponent from "@/components/SplitterComponent"
 import ConnectionStatusPage from "@/components/connection/ConnectionStatusPage"
-import Sidebar from "@/components/sidebar/Sidebar"
+import Sidebar from '@/components/sidebar/Sidebar';
 import WorkSpace from "@/components/workspace"
 import { useAppContext } from "@/context/AppContext"
 import { useSocket } from "@/context/SocketContext"
