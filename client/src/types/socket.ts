@@ -28,8 +28,8 @@ enum SocketEvent {
     DRAWING_UPDATE = "drawing-update",
 }
 
-interface SocketContextType {
+interface SocketContext {
     socket: Socket
 }
 
-export { SocketEvent, SocketContextType, SocketId }
+export { SocketEvent, SocketContext, SocketId }

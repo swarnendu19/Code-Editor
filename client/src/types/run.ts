@@ -4,7 +4,7 @@ interface Language {
     aliases: string[]
 }
 
-interface RunContextType {
+interface RunContext {
     setInput: (input: string) => void
     output: string
     isRunning: boolean
@@ -14,4 +14,4 @@ interface RunContextType {
     runCode: () => void
 }
 
-export { Language, RunContextType }
+export { Language, RunContext }

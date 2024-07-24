@@ -11,7 +11,7 @@ interface FileSystemItem {
     isOpen?: boolean
 }
 
-interface FileContextType {
+interface FileContext {
     fileStructure: FileSystemItem
     openFiles: FileSystemItem[]
     activeFile: FileSystemItem | null
@@ -31,4 +31,4 @@ interface FileContextType {
     downloadFilesAndFolders: () => void
 }
 
-export { FileSystemItem, FileContent, FileContextType, Id, FileName }
+export { FileSystemItem, FileContent, FileContext, Id, FileName }
