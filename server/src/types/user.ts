@@ -1,4 +1,9 @@
-export interface User {
+enum USER_CONNECTION_STATUS {
+	OFFLINE = "offline",
+	ONLINE = "online",
+}
+
+interface User {
 	username: string
 	roomId: string
 	status: USER_CONNECTION_STATUS
@@ -8,7 +13,4 @@ export interface User {
 	socketId: string
 }
 
-export enum USER_CONNECTION_STATUS {
-	OFFLINE = "offline",
-	ONLINE = "online",
-}
+export { USER_CONNECTION_STATUS, User }
