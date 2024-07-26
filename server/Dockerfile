@@ -1,37 +1,27 @@
-# Stage 1: Build Stage
-FROM node:20-alpine as builder
+# Stage 1
 
-WORKDIR /app
+FROM node:18 as builder
 
-# Copy package files and install dependencies
-COPY package*.json ./
-RUN npm ci
+WORKDIR /build
 
-# Copy all files and build the application
-COPY . .
+COPY package*.json .
+RUN npm install
+
+COPY src/ src/
+COPY tsconfig.json tsconfig.json
+
 RUN npm run build
 
-# Stage 2: Production Stage
-FROM node:18-alpine
+
+
+# Stage 2
+
+FROM node:18 as runner
 
 WORKDIR /app
 
-# Copy package files and install production dependencies
-COPY package*.json ./
-ENV NODE_ENV=production
-RUN npm ci --only=production
+COPY --from=builder build/package*.json .
+COPY --from=builder build/node_modules node_modules/
+COPY --from=builder build/dist dist/
 
-# Copy the built files from the build stage
-COPY --from=builder /app/dist ./dist
-
-# Set ownership and permissions
-RUN chown -R node:node /app && chmod -R 755 /app
- 
-# Change to the non-root user
-USER node
-
-# Expose the application port
-EXPOSE 5513
-
-# Start the application with PM2
-CMD ["npm", "run", "dev"]
+CMD [ "npm", "run", "dev" ]
