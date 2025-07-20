@@ -81,14 +81,14 @@ function HomePage() {
 
                             {/* Right side - Form and illustration */}
                             <div className="flex flex-col items-center space-y-8">
-                                <div className="relative">
+                                {/* <div className="relative">
                                     <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl animate-pulse"></div>
                                     <img
                                         src={illustration}
                                         alt="Code Sync Illustration"
                                         className="relative z-10 w-[280px] sm:w-[350px] lg:w-[400px] animate-up-down"
                                     />
-                                </div>
+                                </div> */}
                                 <FormComponent />
                             </div>
                         </div>
