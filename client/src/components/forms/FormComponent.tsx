@@ -89,39 +89,104 @@ const FormComponent = () => {
     }, [currentUser, location.state?.redirect, navigate, setStatus, socket, status])
 
     return (
-        <div className="flex w-full max-w-[500px] flex-col items-center justify-center gap-4 p-4 sm:w-[500px] sm:p-8">
-            <img src={logo} alt="Logo" className="w-full"/>
-            <form onSubmit={joinRoom} className="flex w-full flex-col gap-4">
-                <input
-                    type="text"
-                    name="roomId"
-                    placeholder="Room Id"
-                    className="w-full rounded-md border border-gray-500 bg-darkHover px-3 py-3 focus:outline-none"
-                    onChange={handleInputChanges}
-                    value={currentUser.roomId}
-                />
-                <input
-                    type="text"
-                    name="username"
-                    placeholder="Username"
-                    className="w-full rounded-md border border-gray-500 bg-darkHover px-3 py-3 focus:outline-none"
-                    onChange={handleInputChanges}
-                    value={currentUser.username}
-                    ref={usernameRef}
-                />
-                <button
-                    type="submit"
-                    className="mt-2 w-full rounded-md bg-primary px-8 py-3 text-lg font-semibold text-black"
-                >
-                    Join
-                </button>
-            </form>
-            <button
-                className="cursor-pointer select-none underline"
-                onClick={createNewRoomId}
-            >
-                Generate Unique Room Id
-            </button>
+        <div className="w-full max-w-md">
+            <div className="relative backdrop-blur-xl bg-darkHover/80 border border-primary/20 rounded-2xl p-8 shadow-2xl">
+                {/* Glow effect */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/10 to-primary/5 blur-xl"></div>
+
+                <div className="relative z-10 space-y-6">
+                    {/* Header */}
+                    <div className="text-center space-y-2">
+                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/20 border border-primary/30 mb-4">
+                            <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                            </svg>
+                        </div>
+                        <h2 className="text-2xl font-bold text-white">Join Room</h2>
+                        <p className="text-gray-400 text-sm">Start collaborating in seconds</p>
+                    </div>
+
+                    <form onSubmit={joinRoom} className="space-y-4">
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium text-gray-300">Room ID</label>
+                            <div className="relative">
+                                <input
+                                    type="text"
+                                    name="roomId"
+                                    placeholder="Enter room ID or generate one"
+                                    className="w-full rounded-xl border border-gray-600/50 bg-dark/50 px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+                                    onChange={handleInputChanges}
+                                    value={currentUser.roomId}
+                                />
+                                <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m0 0a2 2 0 012 2m-2-2a2 2 0 00-2 2m0 0a2 2 0 01-2 2m2-2H9m6 0V9a2 2 0 00-2-2M9 7a2 2 0 00-2 2v6a2 2 0 002 2h6a2 2 0 002-2V9a2 2 0 00-2-2" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium text-gray-300">Username</label>
+                            <div className="relative">
+                                <input
+                                    type="text"
+                                    name="username"
+                                    placeholder="Enter your username"
+                                    className="w-full rounded-xl border border-gray-600/50 bg-dark/50 px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+                                    onChange={handleInputChanges}
+                                    value={currentUser.username}
+                                    ref={usernameRef}
+                                />
+                                <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="w-full mt-6 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-dark font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-primary/25"
+                            disabled={status === USER_STATUS.ATTEMPTING_JOIN}
+                        >
+                            {status === USER_STATUS.ATTEMPTING_JOIN ? (
+                                <div className="flex items-center justify-center space-x-2">
+                                    <div className="w-4 h-4 border-2 border-dark/30 border-t-dark rounded-full animate-spin"></div>
+                                    <span>Joining...</span>
+                                </div>
+                            ) : (
+                                <div className="flex items-center justify-center space-x-2">
+                                    <span>Join Room</span>
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                    </svg>
+                                </div>
+                            )}
+                        </button>
+                    </form>
+
+                    <div className="relative">
+                        <div className="absolute inset-0 flex items-center">
+                            <div className="w-full border-t border-gray-600/30"></div>
+                        </div>
+                        <div className="relative flex justify-center text-sm">
+                            <span className="px-2 bg-darkHover/80 text-gray-400">or</span>
+                        </div>
+                    </div>
+
+                    <button
+                        className="w-full text-primary hover:text-primary/80 font-medium text-sm transition-colors duration-200 flex items-center justify-center space-x-2 py-2"
+                        onClick={createNewRoomId}
+                    >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        <span>Generate New Room ID</span>
+                    </button>
+                </div>
+            </div>
         </div>
     )
 }

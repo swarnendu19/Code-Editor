@@ -3,7 +3,6 @@ import GitHubCorner from "./components/GitHubCorner"
 import Toast from "./components/toast/Toast"
 import EditorPage from "./pages/EditorPage"
 import HomePage from "./pages/HomePage"
-import Footer from "./components/common/Footer"
 
 const App = () => {
     return (
@@ -16,7 +15,6 @@ const App = () => {
             </Router>
             <Toast /> {/* Toast component from react-hot-toast */}
             <GitHubCorner />
-            <Footer/>
         </>
     )
 }
