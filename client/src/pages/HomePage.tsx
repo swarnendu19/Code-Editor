@@ -1,4 +1,3 @@
-import illustration from "@/assets/illustration.svg"
 import FormComponent from "@/components/forms/FormComponent"
 import Footer from "@/components/common/Footer"
 
